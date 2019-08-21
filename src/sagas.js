@@ -1,10 +1,11 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import axios from 'axios';
-import { actionUsersSuccess, actionStatusData, actionTasksSuccess } from './actions/'
+import { actionUsersSuccess, actionStatusData, actionTasksSuccess, actionSelectUser } from './actions/'
 
 export default function* rootWatcher() {
     yield takeLatest('GET_USERS_REQUEST', getUsersData); 
     yield takeLatest('GET_TASKS_REQUEST', getTasksData); 
+    yield takeLatest('GET_USER_SELECT_SAGA', getSelectUser);
 }
 
 //Данная saga получит данные о всех пользователях
@@ -49,4 +50,14 @@ function* getTasksData() {
         yield put(actionTasksSuccess(response.data));
         yield put(actionStatusData(true));
     }
+}
+
+//Данная saga получит данные о выбрано пользователе
+function* getSelectUser(action) {
+	yield put(actionStatusData(false));
+	const response = yield call(axios.get, `https://jsonplaceholder.typicode.com/users?id=${action.payload}`); 
+	if (response.status === 200) {
+        yield put(actionSelectUser(response.data)); 
+        yield put(actionStatusData(true));
+	} 
 }

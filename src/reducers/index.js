@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
 
 export const initState = {
-    users: [],
-    tasks: [],
-    filterUsers: [],
-    isFetching: false
+    users: [], //все пользователи
+    tasks: [], //все задачи
+    tasksUsers: [], //все задачи и пользователи чьи задачи
+    userSelect: [], //выбранный пользователь и данные по нем
+    isFetching: false //Детектим загрузку данных
 };
 
 const mainReducer = (state = initState, action) => {
@@ -24,7 +25,7 @@ const mainReducer = (state = initState, action) => {
                 ...state,
                 tasks: action.payload
         };    
-        case "GET_FILTER_USERS":
+        case "GET_TASKS_USERS":
             let filterUsers = action.payload;
             let filterTasks = action.tasks;
             let mapTasks = {}; 
@@ -36,8 +37,13 @@ const mainReducer = (state = initState, action) => {
             });
             return {
                 ...state,
-                filterUsers: filterTasks
-        };    
+                tasksUsers: filterTasks
+        };  
+        case "GET_USER_SELECT":
+            return {
+                ...state,
+                userSelect: action.payload
+        };     
         default:
             return state;    
     }

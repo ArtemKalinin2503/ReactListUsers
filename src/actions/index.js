@@ -26,7 +26,17 @@ export const actionTasksSuccess = (tasks) => {
 	return { type: 'GET_TASKS_SUCCESS', payload: tasks }; 
 };
 
-export const actionFilterUsers = (listUsers, listTasks) => {
-	return { type: 'GET_FILTER_USERS', payload: listUsers, tasks: listTasks}; 
+//Action который запишет в массив tasksUsers (имя пользователя и его id)
+export const actionTasksUsers = (listUsers, listTasks) => {
+	return { type: 'GET_TASKS_USERS', payload: listUsers, tasks: listTasks}; 
 };
 
+//Данный action вызовит saga getSelectUser
+export const actionGetUserData = (userId) => {
+	return { type: 'GET_USER_SELECT_SAGA', payload: userId}; 
+};
+
+//Action который запишет данные по выбранному пользователю
+export const actionSelectUser = (userSelect) => {
+	return { type: 'GET_USER_SELECT', payload: userSelect }; 
+};
