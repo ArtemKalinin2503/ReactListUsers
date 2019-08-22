@@ -40,3 +40,8 @@ export const actionGetUserData = (userId) => {
 export const actionSelectUser = (userSelect) => {
 	return { type: 'GET_USER_SELECT', payload: userSelect }; 
 };
+
+//Action который запишет данные по задачам выбранного пользователя
+export const actionSelectUserTasks = (userTasks) => {
+	return { type: 'GET_USER_SELECT_TASKS', payload: userTasks }; 
+};

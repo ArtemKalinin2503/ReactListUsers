@@ -12,11 +12,24 @@ class ComponentProfile extends Component {
 
     render() {
         if(this.props.isFetching) {
-            console.log(this.props.userSelect);
+            var profileUser = this.props.userSelect.map(function(data) { 
+                return (
+                    <div>
+                        <p>{data.name}</p>
+                        <p>Задачи {data.name}</p>
+                        <ul>
+                            <li>Имя: {data.name}</li>
+                            <li>Телефон: {data.phone}</li>
+                            <li>Email: <a href={'mailto:'+ data.email}>{data.email}</a></li>
+                            <li>Website: <a href={data.website}>{data.website}</a></li>
+                        </ul>
+                    </div>
+                );
+            });
         }
         return (
             <div>
-                Компонент Profile
+                {profileUser}
             </div>
         )
     }
