@@ -5,6 +5,7 @@ export const initState = {
     tasks: [], //все задачи
     tasksUsers: [], //все задачи и пользователи чьи задачи
     userSelect: [], //выбранный пользователь и данные по нем
+    userTasks: [], //задачи выбранного пользователя
     isFetching: false //Детектим загрузку данных
 };
 
@@ -43,7 +44,12 @@ const mainReducer = (state = initState, action) => {
             return {
                 ...state,
                 userSelect: action.payload
-        };     
+        };   
+        case "GET_USER_SELECT_TASKS":
+            return {
+                ...state,
+                userTasks: action.payload
+        };
         default:
             return state;    
     }

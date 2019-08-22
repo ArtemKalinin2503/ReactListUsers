@@ -1,3 +1,4 @@
-#ex1Slider .slider-selection {
-	background: #BABABA;
+.complited {
+	text-decoration: line-through;
+	color: green;
 }

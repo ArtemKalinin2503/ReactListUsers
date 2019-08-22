@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Provider, connect } from 'react-redux';
-import store from '../store';
-import { Link } from 'react-router-dom';
-import { actionGetUsers, actionGetTasks, actionTasksUsers } from '../actions';
+import { connect } from 'react-redux';
+import '../App.css';
 
 class ComponentProfile extends Component {
 
@@ -26,10 +24,43 @@ class ComponentProfile extends Component {
                     </div>
                 );
             });
+            var tasksUser = this.props.userTasks.map(function(data){
+                return (
+                    <div>
+                        <ul>
+                            <li data-completed={data.completed}>
+                                <span className={data.completed ? 'complited' : ''}>{data.title}</span>
+                            </li>
+                        </ul>
+                    </div>
+                )
+            })
         }
         return (
             <div>
                 {profileUser}
+                <form>
+                    <div>
+                        <label>Имя</label>
+                        <input type="text" placeholder=""></input>
+                    </div>   
+                    <div>
+                        <label>Телефон</label>
+                        <input type="tel" placeholder=""></input>
+                    </div>
+                    <div>
+                        <label>Email</label>
+                        <input type="email" placeholder=""></input>
+                    </div>
+                    <div>
+                        <label>Сайт</label>
+                        <input type="text" placeholder=""></input>
+                    </div>
+                    <div>
+                        <input type="submit" value="Сохранить"></input>
+                    </div>     
+                </form>
+                {tasksUser}
             </div>
         )
     }
@@ -40,6 +71,7 @@ const mapStateToProps = (state, ownProps = {}) => ({
     tasks: state.mainReducer.tasks,
     tasksUsers: state.mainReducer.tasksUsers,
     userSelect: state.mainReducer.userSelect,
+    userTasks: state.mainReducer.userTasks,
     isFetching: state.mainReducer.isFetching
 });
 

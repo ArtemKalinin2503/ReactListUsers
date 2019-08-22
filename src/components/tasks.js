@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Provider, connect } from 'react-redux';
+import { connect } from 'react-redux';
 import store from '../store';
 import { Link } from 'react-router-dom';
-import { actionGetUsers, actionGetTasks, actionTasksUsers, actionGetUserData } from '../actions';
+import { actionGetUsers, actionGetTasks, actionTasksUsers, actionGetUserData, actionUserTasksSaga } from '../actions';
 
 class ComponentTasks extends Component {
 
@@ -14,7 +14,7 @@ class ComponentTasks extends Component {
     handleClick = (element) => {
         let userSelectId = element.target.getAttribute('id');
         store.dispatch(actionGetUserData(userSelectId));
-        console.log(userSelectId)
+        store.dispatch(actionUserTasksSaga(userSelectId));   
     }
 
     render() {
@@ -29,7 +29,6 @@ class ComponentTasks extends Component {
                         <li>
                             <p>
                                 <Link
-                                    to="/profile"
                                     to={`/profile/${data.userId}`}
                                     id={data.userId} 
                                     onClick={this.handleClick}
@@ -45,7 +44,8 @@ class ComponentTasks extends Component {
         },this);
         return (
             <div className="component">
-              {listTasks}
+                <h3>Все задачи</h3>
+                {listTasks}
             </div>
         )
     }

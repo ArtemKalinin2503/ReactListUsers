@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Provider, connect } from 'react-redux'; 
+import { Provider } from 'react-redux'; 
 import './App.css';
-import { BrowserRouter, Link, Route, Switch } from 'react-router-dom'; 
+import { BrowserRouter, Route, Switch } from 'react-router-dom'; 
 import store from './store'; 
 import Tasks from './components/tasks';
 import Profile from './components/profile';

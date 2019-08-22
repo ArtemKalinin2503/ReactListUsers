@@ -1,6 +1,3 @@
-
-//Action сетевые для полученния данных
-
 //Данный action нужен для вызова saga getUsersData
 export const actionGetUsers = () => {
 	return { type: 'GET_USERS_REQUEST' }; 
@@ -39,6 +36,11 @@ export const actionGetUserData = (userId) => {
 //Action который запишет данные по выбранному пользователю
 export const actionSelectUser = (userSelect) => {
 	return { type: 'GET_USER_SELECT', payload: userSelect }; 
+};
+
+//Action который вызовит saga getUserTasks
+export const actionUserTasksSaga = (userId) => {
+	return { type: 'GET_USER_TASKS_SAGA', payload: userId }; 
 };
 
 //Action который запишет данные по задачам выбранного пользователя
