@@ -8,10 +8,27 @@ export const actionUsersSuccess = (users) => {
 	return { type: 'GET_USERS_SUCCESS', payload: users }; 
 };
 
-//Данный action переводит состояние isFetching в true/false
-export const actionStatusData = (isFetching) => {
-	return { type: 'STATUS_DATA', payload: isFetching }; 
+//Данный action переводит состояние isFetchingUsersData в true/false
+export const actionStatusUsersData = (isFetchingUsersData) => {
+	return { type: 'STATUS_DATA_USERS_DATA', payload: isFetchingUsersData }; 
 };
+
+//Данный action переводит состояние isFetchingTasksData в true/false
+export const actionStatusTasksData = (isFetchingTasksData) => {
+	return { type: 'STATUS_DATA_TASKS_DATA', payload: isFetchingTasksData }; 
+};
+
+//Данный action переводит состояние isFetchingSelectUser в true/false
+export const actionStatusSelectUserData = (isFetchingSelectUser) => {
+	return { type: 'STATUS_DATA_SELECT_USER_DATA', payload: isFetchingSelectUser }; 
+};
+
+//Данный action переводит состояние isFetchingUseTasks в true/false
+export const actionStatusSelectTasksUserData = (isFetchingUseTasks) => {
+	return { type: 'STATUS_DATA_SELECT_TASKS_USER_DATA', payload: isFetchingUseTasks }; 
+};
+
+
 
 //Данный action нужен для вызова saga getTasksData
 export const actionGetTasks = () => {

@@ -18,7 +18,7 @@ class ComponentTasks extends Component {
     }
 
     render() {
-        if(this.props.isFetching) {
+        if(this.props.isFetchingUsersData && this.props.isFetchingTasksData) {
             store.dispatch(actionTasksUsers(this.props.users, this.props.tasks));
         } 
         let tasksUserProps = this.props.tasksUsers
@@ -56,7 +56,8 @@ const mapStateToProps = (state, ownProps = {}) => ({
     tasks: state.mainReducer.tasks,
     tasksUsers: state.mainReducer.tasksUsers,
     userSelect: state.mainReducer.userSelect,
-    isFetching: state.mainReducer.isFetching
+    isFetchingUsersData: state.mainReducer.isFetchingUsersData,
+    isFetchingTasksData: state.mainReducer.isFetchingTasksData
 });
 
 const mapDispatchToProps = {};

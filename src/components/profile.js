@@ -6,10 +6,6 @@ import {actionCnahgeDataUser} from '../actions';
 
 class ComponentProfile extends Component {
 
-    componentDidMount() {
-      
-    }
-
     handleSubmit = (event) => {
         event.preventDefault();  
         let userName = event.target.name.value;
@@ -20,7 +16,7 @@ class ComponentProfile extends Component {
     }
 
     render() {
-        if(this.props.isFetching) {
+        if(this.props.isFetchingSelectUser && this.props.isFetchingUseTasks) {
             var profileUser = this.props.userSelect.map(function(data) { 
                 return (
                     <div>
@@ -87,7 +83,9 @@ const mapStateToProps = (state, ownProps = {}) => ({
     tasksUsers: state.mainReducer.tasksUsers,
     userSelect: state.mainReducer.userSelect,
     userTasks: state.mainReducer.userTasks,
-    isFetching: state.mainReducer.isFetching
+    isFetchingUsersData: state.mainReducer.isFetchingUsersData,
+    isFetchingSelectUser: state.mainReducer.isFetchingSelectUser,
+    isFetchingUseTasks: state.mainReducer.isFetchingUseTasks
 });
 
 const mapDispatchToProps = {};

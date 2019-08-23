@@ -1,6 +1,6 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import axios from 'axios';
-import { actionUsersSuccess, actionStatusData, actionTasksSuccess, actionSelectUser, actionSelectUserTasks } from './actions/'
+import { actionUsersSuccess, actionStatusUsersData, actionStatusTasksData, actionStatusSelectUserData, actionStatusSelectTasksUserData, actionTasksSuccess, actionSelectUser, actionSelectUserTasks } from './actions/'
 
 export default function* rootWatcher() {
     yield takeLatest('GET_USERS_REQUEST', getUsersData); 
@@ -11,10 +11,10 @@ export default function* rootWatcher() {
 
 //Данная saga получит данные о всех пользователях
 function* getUsersData() {
-    yield put(actionStatusData(false));
+    yield put(actionStatusUsersData(false));
     if(window.hasOwnProperty('__DATA__') &&  window.__DATA__.users) {
         yield put(actionUsersSuccess(window.__DATA__.users));
-        yield put(actionStatusData(true));
+        yield put(actionStatusUsersData(true));
         return;
     }
     const response = yield call(axios.get, 'https://jsonplaceholder.typicode.com/users?');
@@ -27,16 +27,16 @@ function* getUsersData() {
             };
         }
         yield put(actionUsersSuccess(response.data));
-        yield put(actionStatusData(true));
+        yield put(actionStatusUsersData(true));
     }
 }
 
 //Данная saga получит данные о всех задачах
 function* getTasksData() {
-    yield put(actionStatusData(false));
+    yield put(actionStatusTasksData(false));
     if(window.hasOwnProperty('__DATA__') &&  window.__DATA__.tasks) {
         yield put(actionTasksSuccess(window.__DATA__.tasks));
-        yield put(actionStatusData(true));
+        yield put(actionStatusTasksData(true));
         return;
     }
     const response = yield call(axios.get, 'https://jsonplaceholder.typicode.com/todos');
@@ -49,26 +49,26 @@ function* getTasksData() {
             };
         }
         yield put(actionTasksSuccess(response.data));
-        yield put(actionStatusData(true));
+        yield put(actionStatusTasksData(true));
     }
 }
 
 //Данная saga получит данные о выбрано пользователе
 function* getSelectUser(action) {
-	yield put(actionStatusData(false));
+	yield put(actionStatusSelectUserData(false));
 	const response = yield call(axios.get, `https://jsonplaceholder.typicode.com/users?id=${action.payload}`); 
 	if (response.status === 200) {
         yield put(actionSelectUser(response.data)); 
-        yield put(actionStatusData(true));
+        yield put(actionStatusSelectUserData(true));
 	} 
 }
 
 //Данная saga получит данные о задачах выбранного пользователя
 function* getUserTasks(action) {
-	yield put(actionStatusData(false));
+	yield put(actionStatusSelectTasksUserData(false));
 	const response = yield call(axios.get, `https://jsonplaceholder.typicode.com/todos?userId=${action.payload}`); 
 	if (response.status === 200) {
         yield put(actionSelectUserTasks(response.data)); 
-        yield put(actionStatusData(true));
+        yield put(actionStatusSelectTasksUserData(true));
 	} 
 }
