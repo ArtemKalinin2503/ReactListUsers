@@ -47,3 +47,8 @@ export const actionUserTasksSaga = (userId) => {
 export const actionSelectUserTasks = (userTasks) => {
 	return { type: 'GET_USER_SELECT_TASKS', payload: userTasks }; 
 };
+
+//Action который изменяет данные пользователя
+export const actionCnahgeDataUser = (userNameChange, userPhoneChange, userEmailChange, userWebsiteChange) => {
+	return { type: 'GET_CHANGE_DATA_USER', userNameChange: userNameChange, userPhoneChange: userPhoneChange, userEmailChange: userEmailChange, userWebsiteChange: userWebsiteChange}; 
+};

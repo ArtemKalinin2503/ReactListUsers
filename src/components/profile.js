@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import store from '../store';
 import '../App.css';
+import {actionCnahgeDataUser} from '../actions';
 
 class ComponentProfile extends Component {
 
     componentDidMount() {
       
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();  
+        let userName = event.target.name.value;
+        let userPhone = event.target.tel.value;
+        let userEmail = event.target.email.value;
+        let userSite = event.target.site.value;
+        store.dispatch(actionCnahgeDataUser(userName, userPhone, userEmail, userSite));
     }
 
     render() {
@@ -35,31 +46,35 @@ class ComponentProfile extends Component {
                     </div>
                 )
             })
+            var formUser = (
+                <form onSubmit={ e => this.handleSubmit(e)}>
+                    <div>
+                        <label>Имя</label>
+                        <input type="text" defaultValue={this.props.userSelect[0].name} name="name"></input>
+                    </div>   
+                    <div>
+                        <label>Телефон</label>
+                        <input type="tel" defaultValue={this.props.userSelect[0].phone} name="tel"></input>
+                    </div>
+                    <div>
+                        <label>Email</label>
+                        <input type="email" defaultValue={this.props.userSelect[0].email} name="email"></input>
+                    </div>
+                    <div>
+                        <label>Сайт</label>
+                        <input type="text" defaultValue={this.props.userSelect[0].website}  name="site"></input>
+                    </div>
+                    <div>
+                        <input type="submit" value="Сохранить" ></input>
+                    </div>     
+                </form>
+            )
+      
         }
         return (
             <div>
                 {profileUser}
-                <form>
-                    <div>
-                        <label>Имя</label>
-                        <input type="text" placeholder=""></input>
-                    </div>   
-                    <div>
-                        <label>Телефон</label>
-                        <input type="tel" placeholder=""></input>
-                    </div>
-                    <div>
-                        <label>Email</label>
-                        <input type="email" placeholder=""></input>
-                    </div>
-                    <div>
-                        <label>Сайт</label>
-                        <input type="text" placeholder=""></input>
-                    </div>
-                    <div>
-                        <input type="submit" value="Сохранить"></input>
-                    </div>     
-                </form>
+                {formUser}
                 {tasksUser}
             </div>
         )

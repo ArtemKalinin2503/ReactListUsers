@@ -6,6 +6,7 @@ export const initState = {
     tasksUsers: [], //все задачи и пользователи чьи задачи
     userSelect: [], //выбранный пользователь и данные по нем
     userTasks: [], //задачи выбранного пользователя
+    userChangeData: [{}],
     isFetching: false //Детектим загрузку данных
 };
 
@@ -50,6 +51,21 @@ const mainReducer = (state = initState, action) => {
                 ...state,
                 userTasks: action.payload
         };
+        case "GET_CHANGE_DATA_USER":
+            let newUserName = action.userNameChange;
+            let newUserPhone = action.userPhoneChange;
+            let newUserEmail = action.userEmailChange;
+            let newUserWebSite = action.userWebsiteChange;
+            return {
+                ...state,
+                userSelect: [{
+                    name: newUserName,
+                    phone: newUserPhone,
+                    email: newUserEmail,
+                    website: newUserWebSite
+                }]
+                
+            };
         default:
             return state;    
     }
